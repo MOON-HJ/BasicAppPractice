@@ -77,7 +77,10 @@ public final class WeatherViewController: UIViewController {
     view.backgroundColor = .systemTeal
     
     view.addSubview([stackView])
-    stackView.addArrangedSubview([cityLabel, imageView, degree, weeklyWeather, changeCityButton])
+    stackView.addArrangedSubview([cityLabel, imageView, degree, weeklyWeather, UIView(), changeCityButton])
+    weeklyWeather.addArrangedSubview(weeklyWeatherItem)
+    
+    stackView.setCustomSpacing(50, after: degree)
   }
   
   func configureConstraints() {
@@ -87,6 +90,13 @@ public final class WeatherViewController: UIViewController {
     
     imageView.snp.makeConstraints {
       $0.height.equalTo(180)
+    }
+    cityLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
+    imageView.setContentHuggingPriority(.defaultHigh, for: .vertical)
+    degree.setContentHuggingPriority(.defaultHigh, for: .vertical)
+    
+    weeklyWeather.snp.makeConstraints {
+      $0.width.equalToSuperview()
     }
     
     changeCityButton.snp.makeConstraints {
