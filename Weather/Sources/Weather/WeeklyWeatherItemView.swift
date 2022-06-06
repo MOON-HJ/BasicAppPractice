@@ -18,8 +18,7 @@ final class WeeklyWeatherItemView: UIView {
     $0.translatesAutoresizingMaskIntoConstraints = false
   }
   
-  private let weakdayLabel = UILabel().then {
-    $0.text = "MON"
+  private let weekdayLabel = UILabel().then {
     $0.textColor = .label
     $0.textAlignment = .center
     $0.sizeToFit()
@@ -39,8 +38,9 @@ final class WeeklyWeatherItemView: UIView {
     $0.font = .systemFont(ofSize: 30, weight: .medium)
   }
   
-  public init() {
+  public init(data: WeekdayWeather) {
     super.init(frame: .zero)
+    configureData(with: data)
     configureUI()
     configureContraint()
   }
@@ -49,9 +49,15 @@ final class WeeklyWeatherItemView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
   
+  func configureData(with data: WeekdayWeather) {
+    weekdayLabel.text = data.weekday
+    imageView.image = UIImage(systemName: data.image)?.withRenderingMode(.alwaysOriginal)
+    degreeLabel.text = data.degreeDescription
+  }
+  
   func configureUI() {
     self.addSubview(stackView)
-    stackView.addArrangedSubview([weakdayLabel, imageView, degreeLabel])
+    stackView.addArrangedSubview([weekdayLabel, imageView, degreeLabel])
   }
   
   func configureContraint() {
@@ -62,5 +68,15 @@ final class WeeklyWeatherItemView: UIView {
     imageView.snp.makeConstraints {
       $0.size.equalTo(30)
     }
+  }
+}
+
+struct WeekdayWeather {
+  let weekday: String
+  let image: String
+  let degree: Int
+  
+  var degreeDescription: String {
+    return "\(self.degree)°"
   }
 }

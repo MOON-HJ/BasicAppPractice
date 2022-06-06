@@ -44,12 +44,12 @@ public final class WeatherViewController: UIViewController {
   }
   
   private let weeklyWeatherItem: [WeeklyWeatherItemView] = [
-    .init().then { $0.translatesAutoresizingMaskIntoConstraints = false },
-    .init().then { $0.translatesAutoresizingMaskIntoConstraints = false },
-    .init().then { $0.translatesAutoresizingMaskIntoConstraints = false },
-    .init().then { $0.translatesAutoresizingMaskIntoConstraints = false },
-    .init().then { $0.translatesAutoresizingMaskIntoConstraints = false }
-  ]
+    WeekdayWeather(weekday: "MON", image: "sun.max.fill", degree: 27),
+    WeekdayWeather(weekday: "TUES", image: "cloud.rain.fill", degree: 17),
+    WeekdayWeather(weekday: "WED", image: "cloud.sun.fill", degree: 23),
+    WeekdayWeather(weekday: "THUR", image: "sun.max.fill", degree: 24),
+    WeekdayWeather(weekday: "FRI", image: "moon.fill", degree: 14)
+  ].map { .init(data: $0).then { $0.translatesAutoresizingMaskIntoConstraints = false} }
   
   private let changeCityButton = UIButton().then {
     $0.setTitle("Change City", for: .normal)
