@@ -39,7 +39,17 @@ public final class WeatherViewController: UIViewController {
   
   private let weeklyWeather = UIStackView().then {
     $0.axis = .horizontal
+    $0.distribution = .fillEqually
+    $0.translatesAutoresizingMaskIntoConstraints = false
   }
+  
+  private let weeklyWeatherItem: [WeeklyWeatherItemView] = [
+    .init().then { $0.translatesAutoresizingMaskIntoConstraints = false },
+    .init().then { $0.translatesAutoresizingMaskIntoConstraints = false },
+    .init().then { $0.translatesAutoresizingMaskIntoConstraints = false },
+    .init().then { $0.translatesAutoresizingMaskIntoConstraints = false },
+    .init().then { $0.translatesAutoresizingMaskIntoConstraints = false }
+  ]
   
   private let changeCityButton = UIButton().then {
     $0.setTitle("Change City", for: .normal)
