@@ -14,6 +14,7 @@ public final class WeatherViewController: UIViewController {
     $0.axis = .vertical
     $0.alignment = .center
     $0.spacing = 10
+    $0.translatesAutoresizingMaskIntoConstraints = false
   }
  
   private let cityLabel = UILabel().then {
