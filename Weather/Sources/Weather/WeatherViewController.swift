@@ -10,6 +10,9 @@ import SnapKit
 import Then
 
 public final class WeatherViewController: UIViewController {
+  private let cities = ["Seoul", "Tokyo", "LA", "Seattle"]
+  private let weathers = ["cloud.fill", "sun.max.fill", "wind", "cloud.sun.rain.fill"]
+  
   private let stackView = UIStackView().then {
     $0.axis = .vertical
     $0.alignment = .center
@@ -57,6 +60,7 @@ public final class WeatherViewController: UIViewController {
     $0.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
     $0.backgroundColor = .white
     $0.layer.cornerRadius = 40
+    $0.addTarget(self, action: #selector(cityChangeButtonDidTap), for: .touchUpInside)
   }
   
   public init() {
@@ -103,5 +107,11 @@ public final class WeatherViewController: UIViewController {
       $0.height.equalTo(80)
       $0.width.equalToSuperview()
     }
+  }
+  
+  @objc private func cityChangeButtonDidTap() {
+    cityLabel.text = cities.randomElement()
+    imageView.image = UIImage(systemName: weathers.randomElement()!)?.withRenderingMode(.alwaysOriginal)
+    degree.text = "\(Int.random(in: 10..<30))°"
   }
 }
